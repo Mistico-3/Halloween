@@ -7,8 +7,8 @@ Servo servo1;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
 unsigned long timer;
-int head1pos[] = {90,  0,45,135,90,180, 0}; //Head location using degrees
-int head1spd[] = { 0,100, 0, 50, 0,80,10}; //The higher the number, the slower the head will move (80 is slow enough)
+int head1pos[] = {90, 0,45,10,90,135,100,150,180,90}; //Head location using degrees
+int head1spd[] = { 0,80, 0, 0,50,  0, 30, 20,  0,30}; //The higher the number, the slower the head will move (80 is slow enough)
 int x; // initialize the counter for the arrays
 int y; // initialize the counter for the movement
 int pos1; // mark starting position of the servo
@@ -50,7 +50,8 @@ void loop() {
     }
     Serial.print("Degrees to move : "); Serial.print(degreestomove); Serial.println();
     if (speed == 0){
-      servo1.write(pos2)
+      servo1.write(pos2);
+      delay(1000); // Wait one second for the head to finish moving before the next step.
     }else{
       for (int y = 0; y < degreestomove; y++){
         currposition = currposition + direction;
