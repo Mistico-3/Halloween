@@ -10,7 +10,7 @@
  int LIDUP = 9; //Set Pin 8 for LID UP
  int HAND = 10; //Set Pin 11 for Hand Action
  int LIDDOWN = 11; //Set Pin 9 for LID DOWN
- int HAND_PROBABILITY = 45; //Use this variable to setup a percentage of time when the hand comes out (45 = 45% chance)
+ int HAND_PROBABILITY = 75; //Use this variable to setup a percentage of time when the hand comes out (45 = 45% chance)
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -34,7 +34,7 @@ void loop() {
   HandAction(); // Start Hand
   delay(1000); // wait for a second before lowering the lid
   TombLid(LIDDOWN); // Tell Lid to Lower
-  timer = random(25000) + 5000;
+  timer = random(15000) + 8000;
   // timer = 2000;
   delay(timer); // wait between 5 and 20 seconds before starting all over
 }
@@ -51,7 +51,7 @@ void BellSound(){
     digitalWrite(BELL, HIGH);
     delay(50);
     digitalWrite(BELL, LOW);
-    delay(50);
+    delay(500);
   }
 }
 
