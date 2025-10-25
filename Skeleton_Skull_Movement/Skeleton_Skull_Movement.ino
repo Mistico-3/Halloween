@@ -8,7 +8,7 @@ Servo servo1;  // create servo object to control a servo
 
 unsigned long timer;
 int head1pos[] = {90, 0,45,10,90,135,100,150,180,90}; //Head location using degrees
-int head1spd[] = { 0,80, 0, 0,50,  0, 30, 20,  0,30}; //The higher the number, the slower the head will move (80 is slow enough)
+int head1spd[] = { 0,80, 0,90,50, 80,  0,100, 60,30}; //The higher the number, the slower the head will move (80 is slow enough)
 int x; // initialize the counter for the arrays
 int y; // initialize the counter for the movement
 int pos1; // mark starting position of the servo
@@ -33,13 +33,14 @@ void loop() {
   for (int x = 0; x <= elements; x++){
     Serial.print("X value is : "); Serial.print(x); Serial.println();
     pos1 = head1pos[x];
-    speed = head1spd[x];
     if (x == elements){
       Serial.print("End of Array, next position should be 90 : "); Serial.println();
       pos2 = head1pos[0];
+      speed = head1spd[0];
       Serial.print("Next head position is: "); Serial.print(pos2); Serial.println();
     } else {
       pos2 = head1pos[x+1];
+      speed = head1spd[x+1];
     }
     if (pos1 > pos2){
       direction = -1;
@@ -51,7 +52,8 @@ void loop() {
     Serial.print("Degrees to move : "); Serial.print(degreestomove); Serial.println();
     if (speed == 0){
       servo1.write(pos2);
-      delay(1000); // Wait one second for the head to finish moving before the next step.
+      currposition = pos2;
+      delay(2000); // Wait one second for the head to finish moving before the next step.
     }else{
       for (int y = 0; y < degreestomove; y++){
         currposition = currposition + direction;
@@ -59,6 +61,7 @@ void loop() {
         Serial.print("Current Position: "); Serial.print(currposition); Serial.println();
         delay(speed);
       }
+      delay(2000);
     }
   }
 }
